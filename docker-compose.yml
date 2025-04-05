@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyD2ONKYAQgKKb_P1mn9Ta_mpfGnCzRcydM
+    command: npm run dev 
