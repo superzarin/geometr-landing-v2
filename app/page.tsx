@@ -20,9 +20,7 @@ export default function Home() {
       
       {/* Правая колонка с формой */}
       <section className="w-1/2 h-full bg-gray-50 flex items-center justify-center p-8 overflow-y-auto">
-        <div className="w-full max-w-md">
-          <ContactForm selectedPlace={selectedPlace} />
-        </div>
+        <ContactForm selectedPlace={selectedPlace} />
       </section>
     </main>
   );

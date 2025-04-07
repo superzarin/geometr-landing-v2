@@ -101,7 +101,7 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
 
   return (
     <>
-      <div className="w-full bg-white p-6 rounded-lg">
+      <div className="max-w-2xl w-full mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6">
           Получить доступ к дашборду
         </h2>
@@ -132,8 +132,8 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
             <h3 className="text-lg font-medium text-gray-900">
               Категории общественного питания
             </h3>
-            <div className="bg-gray-50 p-4 rounded-lg max-h-[300px] overflow-y-auto">
-              <FormGroup className="grid grid-cols-1 gap-2">
+            <div className="bg-gray-50 p-4 rounded-lg max-h-[420px] overflow-y-auto">
+              <FormGroup className="grid grid-cols-3 gap-x-4 gap-y-1">
                 {FOOD_CATEGORIES.map((category) => (
                   <Controller
                     key={category}
@@ -204,6 +204,7 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
               '&.Mui-disabled': {
                 backgroundColor: '#cccccc',
               },
+              textTransform: 'none',
             }}
           >
             Купить за 1500 руб.
@@ -229,18 +230,32 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
+        PaperProps={{
+          className: "flex flex-col"
+        }}
       >
-        <DialogTitle id="alert-dialog-title">
-          Спасибо за заявку!
+        <DialogTitle id="alert-dialog-title" className="text-center">
+          Спасибо за покупку дашборда!
         </DialogTitle>
         <DialogContent>
-          <p>
-            Мы свяжемся с вами в ближайшее время для подтверждения заявки.
+          <p className="text-center">
+            Ссылка на дашборд отправлена на указанный email.
+            <br />
+            На всякий случай проверьте папку Спам.
           </p>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} autoFocus>
-            Закрыть
+        <DialogActions sx={{ justifyContent: 'center', padding: '16px 24px 24px' }}>
+          <Button 
+            onClick={handleCloseDialog} 
+            variant="contained" 
+            color="success"
+            sx={{ 
+              minWidth: '200px',
+              textTransform: 'none',
+              fontSize: '1rem'
+            }}
+          >
+            Выбрать новое место на карте
           </Button>
         </DialogActions>
       </Dialog>
