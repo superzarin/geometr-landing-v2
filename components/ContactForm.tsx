@@ -101,8 +101,8 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
 
   return (
     <>
-      <div id="contact-form" className="max-w-2xl w-full mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+      <div className="w-full bg-white p-6 rounded-lg">
+        <h2 className="text-2xl font-bold mb-6">
           Получить доступ к дашборду
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -132,8 +132,8 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
             <h3 className="text-lg font-medium text-gray-900">
               Категории общественного питания
             </h3>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <FormGroup className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <div className="bg-gray-50 p-4 rounded-lg max-h-[300px] overflow-y-auto">
+              <FormGroup className="grid grid-cols-1 gap-2">
                 {FOOD_CATEGORIES.map((category) => (
                   <Controller
                     key={category}
@@ -190,6 +190,25 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
             )}
           </div>
 
+          {/* Кнопка отправки */}
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={!isFormValid}
+            sx={{
+              backgroundColor: '#4CAF50',
+              '&:hover': {
+                backgroundColor: '#45a049',
+              },
+              '&.Mui-disabled': {
+                backgroundColor: '#cccccc',
+              },
+            }}
+          >
+            Купить за 1500 руб.
+          </Button>
+
           {/* Текст с условиями */}
           <div className="text-xs text-gray-500">
             Нажимая кнопку «Купить за 1500 руб.», вы принимаете условия{' '}
@@ -199,75 +218,29 @@ export default function ContactForm({ selectedPlace }: ContactFormProps) {
               rel="noopener noreferrer" 
               className="text-blue-600 hover:underline"
             >
-              Пользовательского соглашения
+              использования платформы
             </a>
-            . Условия и цели обработки персональных данных определены в{' '}
-            <a 
-              href="https://law.2gis.ru/privacy" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-blue-600 hover:underline"
-            >
-              Политике конфиденциальности
-            </a>
-            .{' '}
-            <a 
-              href="https://law.2gis.ru/personal-data-dublgis" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-blue-600 hover:underline"
-            >
-              Политика обработки персональных данных
-            </a>
-            .
           </div>
-
-          {/* Кнопка отправки */}
-          <button
-            type="submit"
-            disabled={!isFormValid}
-            className={`w-full py-2 px-4 rounded-md transition-colors ${
-              isFormValid 
-                ? 'bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            Купить за 1500 руб.
-          </button>
         </form>
       </div>
 
+      {/* Диалоговое окно успешной отправки */}
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        PaperProps={{
-          className: "flex flex-col"
-        }}
       >
-        <DialogTitle id="alert-dialog-title" className="text-center">
-          {"Спасибо за покупку дашборда!"}
+        <DialogTitle id="alert-dialog-title">
+          Спасибо за заявку!
         </DialogTitle>
         <DialogContent>
-          <p className="text-center">
-            Ссылка на дашборд отправлена на указанный email.
-            <br />
-            На всякий случай проверьте папку Спам.
+          <p>
+            Мы свяжемся с вами в ближайшее время для подтверждения заявки.
           </p>
         </DialogContent>
-        <DialogActions sx={{ justifyContent: 'center', padding: '16px 24px 24px' }}>
-          <Button 
-            onClick={handleCloseDialog} 
-            variant="contained" 
-            color="success"
-            sx={{ 
-              minWidth: '200px',
-              textTransform: 'none',
-              fontSize: '1rem'
-            }}
-          >
-            Выбрать новое место на карте
+        <DialogActions>
+          <Button onClick={handleCloseDialog} autoFocus>
+            Закрыть
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,7 +1,9 @@
 version: '3'
 services:
   web:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
@@ -10,4 +12,7 @@ services:
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyD2ONKYAQgKKb_P1mn9Ta_mpfGnCzRcydM
-    command: npm run dev 
+      - WATCHPACK_POLLING=true
+    command: sh -c "npm install && npm run dev"
+    stdin_open: true
+    tty: true 

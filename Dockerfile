@@ -7,8 +7,8 @@ WORKDIR /app
 # Копируем файлы package.json и package-lock.json
 COPY package*.json ./
 
-# Устанавливаем зависимости с флагом --legacy-peer-deps
-RUN npm install --legacy-peer-deps
+# Устанавливаем зависимости
+RUN npm install
 
 # Копируем остальные файлы проекта
 COPY . .
